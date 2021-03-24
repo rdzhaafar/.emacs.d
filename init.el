@@ -95,6 +95,10 @@
   (("C-s" . swiper)
    ("C-r" . swiper)))
 
+(use-package rust-mode
+  :config
+  (setq rust-format-on-save t))
+
 ; NOTE: GCMH should always be loaded last
 (use-package gcmh
 	     :init
