@@ -45,7 +45,7 @@
 		    (if (font-installed-p "JetBrains Mono NL")
 			"JetBrains Mono NL"
 		      "Source Code Pro")
-                    :height 110
+                    :height 100
                     :weight 'normal
                     :width 'normal)
 
@@ -65,14 +65,6 @@
 (defun rd-startup-echo-area-message ()
   (message ""))
 (defalias 'startup-echo-area-message 'rd-startup-echo-area-message)
-
-
-(use-package doom-themes
-  :config
-  (setq doom-themes-enable-bold t
-	doom-themes-enable-italic t)
-  (load-theme 'doom-one t)
-  (doom-themes-visual-bell-config))
 
 (use-package ivy
   :diminish
@@ -98,6 +90,16 @@
 (use-package rust-mode
   :config
   (setq rust-format-on-save t))
+
+(if (string-equal system-type "windows-nt")
+    (setq default-directory "C:/Users/Rida/"))
+
+; Clang-format
+(load "~/.emacs.d/clang-format.el")
+(global-set-key (kbd "M-f") 'clang-format-buffer)
+
+; turn off Emacs's built-in braindead autoindenting
+(electric-indent-mode -1)
 
 ; NOTE: GCMH should always be loaded last
 (use-package gcmh
