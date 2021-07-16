@@ -45,7 +45,7 @@
 		    (if (font-installed-p "JetBrains Mono NL")
 			"JetBrains Mono NL"
 		      "Source Code Pro")
-                    :height 100
+                    :height 120
                     :weight 'normal
                     :width 'normal)
 
@@ -87,19 +87,14 @@
   (("C-s" . swiper)
    ("C-r" . swiper)))
 
-(use-package rust-mode
-  :config
-  (setq rust-format-on-save t))
-
+; If running on Windows (which is not likely, but still happens)
+; Set the home to "~" instead of AppData
 (if (string-equal system-type "windows-nt")
     (setq default-directory "C:/Users/Rida/"))
 
-; Clang-format
-(load "~/.emacs.d/clang-format.el")
-(global-set-key (kbd "M-f") 'clang-format-buffer)
-
-; turn off Emacs's built-in braindead autoindenting
-(electric-indent-mode -1)
+; Fix default C/C++ formatting
+(setq c-default-style "linux"
+      c-basic-offset 4)
 
 ; NOTE: GCMH should always be loaded last
 (use-package gcmh
