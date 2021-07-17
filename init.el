@@ -66,6 +66,13 @@
   (message ""))
 (defalias 'startup-echo-area-message 'rd-startup-echo-area-message)
 
+(use-package doom-themes
+  :config
+  (setq doom-themes-enable-bold t
+	doom-themes-enable-italic t)
+  (load-theme 'doom-opera))
+	
+
 (use-package ivy
   :diminish
   :custom
