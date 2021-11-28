@@ -16,6 +16,7 @@
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 (setq create-lockfiles nil)
+(setq auto-save-default nil)
 
 ;; Alias "yes or no" prompt to "y or n" because I can't
 ;; be bothered to type 2 extra letters
