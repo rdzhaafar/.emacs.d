@@ -33,11 +33,11 @@
 	nil
       t)))
 
-;; Change default font to SF Mono if installed
-(if (font-is-installed "SF Mono")
+;; Change default font to Inconsolata if installed 
+(if (font-is-installed "Inconsolata")
     (set-face-attribute 'default nil
-			:family "SF Mono"
-			:height 130
+			:family "Inconsolata"
+			:height 150
 			:weight 'normal
 			:width 'normal))
 
