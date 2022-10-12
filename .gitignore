@@ -4,3 +4,6 @@ auto-save-list
 recentf
 .DS_Store
 .localized
+
+# straight.el packages
+straight

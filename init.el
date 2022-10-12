@@ -1,8 +1,8 @@
 ;; -*- lexical-binding: t -*-
 
-;; ==================================================================
+;; ==============================================================================
 ;; Random tweaks
-;; ==================================================================
+;; ==============================================================================
 
 ;; Disable autosave files and all kinds of miscellaneous
 ;; garbage that litters in source directories
@@ -22,9 +22,9 @@
 ;; be bothered to type 2 extra letters
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-;; ==================================================================
+;; ==============================================================================
 ;; Visual tweaks
-;; ==================================================================
+;; ==============================================================================
 
 (defun font-is-installed (font-name)
   "check if font is installed on a system"
@@ -33,11 +33,11 @@
 	nil
       t)))
 
-;; Change default font to Inconsolata if installed 
+;; Change default font to Inconsolata if installed
 (if (font-is-installed "Inconsolata")
     (set-face-attribute 'default nil
 			:family "Inconsolata"
-			:height 150
+			:height 160
 			:weight 'normal
 			:width 'normal))
 
@@ -58,7 +58,7 @@
     (toggle-scroll-bar -1)
     (tool-bar-mode -1)
     (global-hl-line-mode 1)
-    (set-frame-size (selected-frame) 110 70)))
+    (add-to-list 'initial-frame-alist '(fullscreen . maximized))))
 
 ;; Hide startup screen and inhibit the welcome message
 (setq inhibit-startup-screen t)
@@ -67,10 +67,9 @@
   (message ""))
 (defalias 'startup-echo-area-message 'no-startup-echo-area-message)
 
-
-;; ==================================================================
+;; ==============================================================================
 ;; Editor settings
-;; ==================================================================
+;; ==============================================================================
 
 ;; Reload buffers automatically when they're changed on disk
 (setq global-auto-revert-mode t)
@@ -79,6 +78,50 @@
 (setq c-default-style "linux"
       c-basic-offset 4)
 
-;; Load and use go-mode
-(load (expand-file-name "go-mode.el" user-emacs-directory))
-(require 'go-mode)
+;; ==============================================================================
+;; Package manager config
+;; ==============================================================================
+
+;; Install straight.el
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 6))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+	(url-retrieve-synchronously
+         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
+;; Disable package.el
+(setq package-enable-at-startup nil)
+
+;; Install use-package
+(straight-use-package 'use-package)
+(setq straight-use-package-by-default t)
+
+;; Always automatically install packages
+(setq use-package-always-ensure t)
+
+;; ==============================================================================
+;; Packages
+;; ==============================================================================
+
+(use-package go-mode)
+(use-package doom-modeline
+  :init
+  (doom-modeline-mode 1))
+(use-package github-theme
+  :init
+  (load-theme 'github t))
+
+;; ==============================================================================
+;; Command aliases
+;; ==============================================================================
+
+(defalias 'end 'end-of-buffer)
+(defalias 'start 'beginning-of-buffer)
+

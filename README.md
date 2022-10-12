@@ -7,3 +7,15 @@ I must master my life.
 useless.
 
 ...
+
+
+# Cheat sheet
+
+- Finding out what a shortcut does
+
+M-x describe-key (followed by a shortcut)
+
+- Finding out what shortcuts does a command have
+
+M-x where-is (followed by a command)
+
